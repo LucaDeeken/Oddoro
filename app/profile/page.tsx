@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
 import styles from "./page.module.css";
 
@@ -16,7 +17,8 @@ import LogoutButton from "@/components/LogoutButton";
 import { getProfile } from "@/lib/db/getProfile";
 
 export default async function ProfilePage() {
-  const { user, profile } = await getProfile();
+  const supabase = await createClient();
+  const { user, profile } = await getProfile(supabase);
 
   if (!user) {
     redirect("/login");

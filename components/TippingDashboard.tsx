@@ -22,6 +22,7 @@ export default function TippingDashboard({ matchesCup }) {
     awayGoals: number | null,
     h2hPoints: number | null,
     exactPoints: number | null,
+    isFinished: boolean,
   ) {
     setPredictions((prev) => [
       ...prev.filter((prediction) => prediction.matchId !== match.id),
@@ -34,10 +35,12 @@ export default function TippingDashboard({ matchesCup }) {
         awayGoals,
         h2hPoints,
         exactPoints,
+        isFinished: match.is_finished,
       },
     ]);
   }
 
+  console.log(matchesCup);
   const totalHeadToHeadPoints = Object.values(predictions).reduce(
     (sum, prediction) => sum + (prediction.h2hPoints ?? 0),
     0,
@@ -112,6 +115,7 @@ export default function TippingDashboard({ matchesCup }) {
           totalExactPoints={totalExactPoints}
           totalHeadToHeadPoints={totalHeadToHeadPoints}
           predictionSummary={predictionSummary}
+          predictions={predictions}
         />
       </main>
     </>

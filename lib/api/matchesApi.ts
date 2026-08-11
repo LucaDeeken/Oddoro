@@ -1,5 +1,5 @@
 export async function getSeasonStats() {
-  const url = `https://api.openligadb.de/getmatchdata/bl3/2025/`;
+  const url = `https://api.openligadb.de/getmatchdata/bl2/2026/`;
 
   const res = await fetch(url, {
     next: { revalidate: 300 }, // 5 Minuten Cache

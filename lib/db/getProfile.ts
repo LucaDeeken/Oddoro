@@ -1,8 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
+import { SupabaseClient } from "@supabase/supabase-js";
 
-export async function getProfile() {
-  const supabase = await createClient();
-
+export async function getProfile(supabase: SupabaseClient) {
   const {
     data: { user },
     error: userError,

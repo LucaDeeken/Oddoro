@@ -6,7 +6,6 @@ import { getMatchScorePoints } from "@/lib/db/getMatchScorePoints";
 export async function POST(req: Request) {
   try {
     const { matchId } = await req.json();
-
     const supabase = await createClient();
 
     const result = await getMatchScorePoints(supabase, matchId);

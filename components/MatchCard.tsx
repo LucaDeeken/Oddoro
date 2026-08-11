@@ -54,7 +54,6 @@ export default function MatchCard({ match, onPredictionChange }) {
         );
 
   let points = exactScoreData?.points ?? 0;
-
   const hasPrediction = homeGoals !== null && awayGoals !== null;
 
   if (hasPrediction) {

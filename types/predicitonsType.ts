@@ -7,6 +7,7 @@ export type Prediction = {
   awayGoals: number | null;
   h2hPoints: number | null;
   exactPoints: number | null;
+  isFinished: boolean;
 };
 
 export type Predictions = Prediction[];

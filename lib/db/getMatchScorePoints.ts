@@ -4,6 +4,7 @@ export async function getMatchScorePoints(
   supabase: SupabaseClient,
   matchId: number,
 ) {
+  console.log(matchId);
   const { data, error } = await supabase
     .from("match_score_points")
     .select(
@@ -23,6 +24,6 @@ export async function getMatchScorePoints(
     console.error("GET MATCH SCORE POINTS ERROR:", error);
     throw error;
   }
-
+  console.log(data);
   return data;
 }
