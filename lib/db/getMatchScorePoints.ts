@@ -6,7 +6,7 @@ export async function getMatchScorePoints(
 ) {
   console.log(matchId);
   const { data, error } = await supabase
-    .from("match_score_points")
+    .from("Match_Score_Points")
     .select(
       `
       home_goals,
