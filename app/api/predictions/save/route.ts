@@ -17,7 +17,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const result = await savePredictions(user.id, prediction);
+    const result = await savePredictions(supabase, profile.id, prediction);
 
     return NextResponse.json(result);
   } catch (error) {

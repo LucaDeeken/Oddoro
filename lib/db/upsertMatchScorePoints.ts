@@ -22,7 +22,7 @@ export async function upsertMatchScorePoints(
     points: score.points,
   }));
 
-  const { error } = await supabase.from("match_score_points").upsert(rows, {
+  const { error } = await supabase.from("Match_Score_Points").upsert(rows, {
     onConflict: "match_id,home_goals,away_goals",
   });
 

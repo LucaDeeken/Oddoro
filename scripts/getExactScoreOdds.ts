@@ -58,6 +58,15 @@ export async function initGetExactScoreOddsScript(
         expectedGoalsStatsForMatch.expectedAwayGoals *= 0.5;
       }
 
+      if (homeTeam.demoted) {
+        expectedGoalsStatsForMatch.expectedHomeGoals *= 1.5;
+        expectedGoalsStatsForMatch.expectedAwayGoals *= 0.5;
+      }
+      if (awayTeam.demoted) {
+        expectedGoalsStatsForMatch.expectedHomeGoals *= 0.5;
+        expectedGoalsStatsForMatch.expectedAwayGoals *= 1.5;
+      }
+
       const scores = calculateScoreProbabilities(
         expectedGoalsStatsForMatch.expectedHomeGoals,
         expectedGoalsStatsForMatch.expectedAwayGoals,

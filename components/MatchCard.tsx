@@ -58,16 +58,16 @@ export default function MatchCard({ match, onPredictionChange }) {
 
   if (hasPrediction) {
     if (homeGoals === awayGoals) {
-      points += Math.floor(match.draw_h2h_odd);
+      points += Math.round(match.draw_h2h_odds);
     } else if (homeGoals > awayGoals) {
       // Heim gewinnt
-      if (match.home_h2h_odd > match.away_h2h_odd) {
-        points += Math.floor(match.home_h2h_odd);
+      if (match.home_h2h_odds > match.away_h2h_odds) {
+        points += Math.round(match.home_h2h_odds);
       }
     } else {
       // Auswärts gewinnt
-      if (match.away_h2h_odd > match.home_h2h_odd) {
-        points += Math.floor(match.away_h2h_odd);
+      if (match.away_h2h_odds > match.home_h2h_odds) {
+        points += Math.round(match.away_h2h_odds);
       }
     }
   }
@@ -76,10 +76,10 @@ export default function MatchCard({ match, onPredictionChange }) {
     homeGoals == null || awayGoals == null
       ? null
       : homeGoals > awayGoals
-        ? Math.round((match?.home_h2h_odd ?? 0) * 2)
+        ? match.home_h2h_points
         : homeGoals < awayGoals
-          ? Math.round((match?.away_h2h_odd ?? 0) * 2)
-          : Math.round((match?.draw_h2h_odd ?? 0) * 2);
+          ? match.away_h2h_points
+          : match.draw_h2h_points;
 
   useEffect(() => {
     onPredictionChange(match, homeGoals, awayGoals, tendencyPoints, points);
