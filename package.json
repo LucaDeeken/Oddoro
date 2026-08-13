@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "eslint",
     "importMatches": "npx tsx scripts/importMatchesData.ts",
-    "getTeamGoalStatsAndUpsertToDB": "npx tsx scripts/getTeamGoalStatsAndUpsertToDB.ts",
     "upsertTeams": "npx tsx scripts/upsertTeamsFromAllMatches.ts",
     "getExactScoreOdds": "npx tsx scripts/getExactScoreOdds.ts",
     "importH2HIntoMatches": "npx tsx scripts/importHeadToHeadIntoMatchesDB.ts"
