@@ -78,7 +78,7 @@ export async function initGetExactScoreOddsScript(
 
 async function main() {
   const seasonId = 4;
-  const matchday = "2. Spieltag";
+  const matchday = "3. Spieltag";
 
   try {
     await initGetExactScoreOddsScript(seasonId, matchday);

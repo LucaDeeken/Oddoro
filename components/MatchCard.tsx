@@ -3,7 +3,7 @@ import { Card, NumberInput } from "@mantine/core";
 import styles from "./MatchCard.module.css";
 import { useState, useEffect } from "react";
 
-export default function MatchCard({ match, onPredictionChange }) {
+export default function MatchCard({ match, onPredictionChange, isLocked }) {
   const [homeGoals, setHomeGoals] = useState<number | null>(null);
   const [awayGoals, setAwayGoals] = useState<number | null>(null);
   const [scoreStats, setScoreStats] = useState<ScoreStat[]>([]);
@@ -49,9 +49,9 @@ export default function MatchCard({ match, onPredictionChange }) {
     homeGoals == null || awayGoals == null
       ? null
       : scoreStats.find(
-          (item) =>
-            item.home_goals === homeGoals && item.away_goals === awayGoals,
-        );
+        (item) =>
+          item.home_goals === homeGoals && item.away_goals === awayGoals,
+      );
 
   let points = exactScoreData?.points ?? 0;
   const hasPrediction = homeGoals !== null && awayGoals !== null;
@@ -84,6 +84,8 @@ export default function MatchCard({ match, onPredictionChange }) {
   useEffect(() => {
     onPredictionChange(match, homeGoals, awayGoals, tendencyPoints, points);
   }, [homeGoals, awayGoals, tendencyPoints, points]);
+
+  console.log("spieltag ist" + isLocked)
   return (
     <Card
       shadow="sm"
@@ -96,6 +98,7 @@ export default function MatchCard({ match, onPredictionChange }) {
       <div className={styles.inputs}>
         <NumberInput
           hideControls
+          disabled={isLocked}
           className={styles.numberInput}
           classNames={{
             label: styles.label,
@@ -115,6 +118,7 @@ export default function MatchCard({ match, onPredictionChange }) {
         />
         <span className={styles.spanBetweenGoals}>:</span>
         <NumberInput
+          disabled={isLocked}
           hideControls
           className={styles.numberInput}
           classNames={{

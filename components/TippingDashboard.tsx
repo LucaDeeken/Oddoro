@@ -10,7 +10,7 @@ import SavePredictionSummary from "@/components/SavePredictionSummary";
 
 import { SliderWhite } from "@/components/Slider";
 
-export default function TippingDashboard({ matchesCup }) {
+export default function TippingDashboard({ wholeSeasonGames }) {
   //Speichert die TorTipps des Users
   const [predictions, setPredictions] = useState<Predictions>([]);
   const [matchday, setMatchday] = useState(1);
@@ -40,7 +40,7 @@ export default function TippingDashboard({ matchesCup }) {
     ]);
   }
 
-  console.log(matchesCup);
+  console.log(wholeSeasonGames);
   const totalHeadToHeadPoints = Object.values(predictions).reduce(
     (sum, prediction) => sum + (prediction.h2hPoints ?? 0),
     0,
@@ -65,13 +65,28 @@ export default function TippingDashboard({ matchesCup }) {
 
   console.log(predictions);
 
-  const numberOfMatchdays = new Set(matchesCup.map((match) => match.matchday))
+  const numberOfMatchdays = new Set(wholeSeasonGames.map((match) => match.matchday))
     .size;
 
-  const filteredMatches = matchesCup.filter(
+  const filteredMatches = wholeSeasonGames.filter(
     (match) => match.matchday === `${matchday}. Spieltag`,
   );
 
+  let isMatchdayLocked = false;
+
+  for (const match of filteredMatches) {
+    const hasOdds =
+      match.home_h2h_odds !== null &&
+      match.draw_h2h_odds !== null &&
+      match.away_h2h_odds !== null;
+
+    console.log(hasOdds);
+    if (!hasOdds || match.is_finished) {
+      isMatchdayLocked = true;
+      break;
+    }
+  }
+  console.log(isMatchdayLocked);
   //hole alle individuellen Datumseinträge
   const dates: string[] = [];
   for (const match of filteredMatches) {
@@ -106,6 +121,8 @@ export default function TippingDashboard({ matchesCup }) {
                   key={match.id}
                   match={match}
                   onPredictionChange={updatePrediction}
+                  isLocked={isMatchdayLocked}
+
                 />
               ))}
             </DateWrapper>

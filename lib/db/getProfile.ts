@@ -13,6 +13,7 @@ export async function getProfile(supabase: SupabaseClient) {
     };
   }
 
+
   const { data: profile, error: profileError } = await supabase
     .from("Profiles")
     .select("*")

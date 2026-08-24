@@ -4,13 +4,13 @@ import TippingDashboard from "@/components/TippingDashboard";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export default async function Dashboard() {
-  const matchesCup = await getMatchesBySeasonId(supabaseAdmin, 4);
+  const wholeSeasonGames = await getMatchesBySeasonId(supabaseAdmin, 4);
 
   //console.log(matchesCup);
 
   return (
     <>
-      <TippingDashboard matchesCup={matchesCup}></TippingDashboard>
+      <TippingDashboard wholeSeasonGames={wholeSeasonGames}></TippingDashboard>
     </>
   );
 }
