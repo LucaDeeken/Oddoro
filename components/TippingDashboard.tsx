@@ -96,6 +96,28 @@ export default function TippingDashboard({ wholeSeasonGames }) {
     }
   }
   console.log(filteredMatches);
+
+  //sortiert das Season Array und bestimmt den nächst anstehenden Spieltag
+  useEffect(() => {
+    const now = new Date();
+
+    const nextMatch = wholeSeasonGames
+      .filter((match) => new Date(match.kickoff) > now)
+      .sort(
+        (a, b) =>
+          new Date(a.kickoff).getTime() -
+          new Date(b.kickoff).getTime()
+      )[0];
+
+    if (nextMatch) {
+      const currentMatchday = Number(
+        nextMatch.matchday.match(/\d+/)?.[0]
+      );
+
+      setMatchday(currentMatchday);
+    }
+  }, [wholeSeasonGames]);
+
   return (
     <>
       <main className={styles.main}>
