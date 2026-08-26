@@ -14,8 +14,8 @@ export async function GET() {
         { status: 401 },
       );
     }
-
-    if (!profile.adminStatus) {
+    console.log(profile)
+    if (!profile.is_admin) {
       return NextResponse.json(
         { error: "Forbidden" },
         { status: 403 },
@@ -30,7 +30,8 @@ export async function GET() {
     if (error) {
       throw error;
     }
-
+    console.log(leagues)
+    console.log(error);
     return NextResponse.json(leagues);
   } catch (error) {
     console.error("Admin leagues error:", error);

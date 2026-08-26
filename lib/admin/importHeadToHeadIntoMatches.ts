@@ -12,7 +12,6 @@ function mapOddsName(name: string) {
 
 export async function updateHeadToHead(supabase: SupabaseClient, sportskey: string) {
   const oddsMatches = await getOddsApi(sportskey);
-
   let updated = 0;
 
   for (const oddsMatch of oddsMatches) {
@@ -45,7 +44,7 @@ export async function updateHeadToHead(supabase: SupabaseClient, sportskey: stri
 
     updated++;
   }
-
+  console.log(updated);
   return {
     updated,
   };

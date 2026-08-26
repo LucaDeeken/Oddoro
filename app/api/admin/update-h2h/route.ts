@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { supabaseAdmin } from "@/lib/supabase/admin";
 import { getProfile } from "@/lib/db/getProfile";
 import { updateHeadToHead } from "@/lib/admin/importHeadToHeadIntoMatches";
 
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!profile.adminStatus) {
+    if (!profile.is_admin) {
       return NextResponse.json(
         { error: "Forbidden" },
         { status: 403 },
@@ -49,7 +50,7 @@ export async function POST(req: Request) {
 
     // H2H aktualisieren
     const result = await updateHeadToHead(
-      supabase,
+      supabaseAdmin,
       league.odds_api_sport_key,
     );
 
