@@ -29,7 +29,8 @@ export async function updateHeadToHead(supabase: SupabaseClient, sportskey: stri
     const drawPoints = calculateHeadToHeadPoints(drawOdd);
     const awayWinPoints = calculateHeadToHeadPoints(awayWinOdd);
 
-    await updateH2HIntoMatches(
+
+    const updatedMatches = await updateH2HIntoMatches(
       supabase,
       homeWinOdd,
       drawOdd,
@@ -42,7 +43,17 @@ export async function updateHeadToHead(supabase: SupabaseClient, sportskey: stri
       oddsMatch,
     );
 
-    updated++;
+    if (updatedMatches.length > 0) {
+      updated++;
+    } else {
+      console.warn("Match nicht gefunden:", {
+        home: homeName,
+        away: awayName,
+        homeTeamId,
+        awayTeamId,
+        kickoff: oddsMatch.commence_time,
+      });
+    }
   }
   console.log(updated);
   return {

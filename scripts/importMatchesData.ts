@@ -19,7 +19,6 @@ import "dotenv/config";
 //Der Returnwert entspricht allen benötigten Feldern in einer gesammelten JSON.
 async function buildJsonFromSeasonStats(): Promise<SeasonJson> {
   const data = await getSeasonStats();
-
   const leagueNameShortcut = data[0]?.leagueShortcut ?? "";
 
   //LEAGUE DATA

@@ -21,7 +21,7 @@ export async function upsertMatches(
   const { data, error } = await supabase
     .from("Matches")
     .upsert(payload, {
-      onConflict: "season_id,home_team_id,away_team_id,kickoff",
+      onConflict: "season_id,home_team_id,away_team_id",
     })
     .select();
 

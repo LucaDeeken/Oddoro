@@ -1,7 +1,7 @@
 import { OddsMatch } from "@/types/oddsApiType";
 import "dotenv/config";
 
-export async function getOddsApi(sportskey : string): Promise<OddsMatch[]> {
+export async function getOddsApi(sportskey: string): Promise<OddsMatch[]> {
   const apiKey = process.env.ODDS_API_KEY;
 
   if (!apiKey) {
