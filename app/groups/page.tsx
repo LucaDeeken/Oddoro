@@ -16,7 +16,7 @@ export default function GroupsPage() {
                 <Paper withBorder shadow="sm" p="lg" radius="md">
                     <Stack>
                         <Text>
-                            Hier werden später deine Gruppen angezeigt.
+                            Gruppen hier.
                         </Text>
 
                         <Button onClick={() => router.push("/groups/create")}>
