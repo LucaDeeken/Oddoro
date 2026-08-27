@@ -31,7 +31,6 @@ export default function SavePredictionSummary({
 
       const data = await response.json();
 
-      console.log(data);
       if (!response.ok) {
         throw new Error(data.error || "Fehler beim Speichern");
       }
