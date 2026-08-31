@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
     Button,
@@ -25,6 +26,8 @@ export default function CreateGroupPage() {
     const [loadingCreate, setLoadingCreate] = useState(false);
 
     const [error, setError] = useState("");
+
+    const router = useRouter();
 
     useEffect(() => {
         async function loadLeagues() {
@@ -92,8 +95,7 @@ export default function CreateGroupPage() {
 
             console.log("Gruppe erstellt:", data.group);
 
-            // Später:
-            // router.push(`/groups/${data.group.id}`);
+            router.push(`/groups/${data.group.id}`);
         } catch (error) {
             console.error(error);
 
