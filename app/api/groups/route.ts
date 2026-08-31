@@ -33,7 +33,8 @@ export async function POST(req: Request) {
                 { status: 401 },
             );
         }
-
+        console.log(user);
+        console.log(profile);
         //current SeasonID holen
         const activeSeasonId = await getCurrentSeasonByLeagueId(
             supabase,
@@ -94,6 +95,45 @@ export async function POST(req: Request) {
                     error instanceof Error
                         ? error.message
                         : "Unbekannter Fehler",
+            },
+            { status: 500 },
+        );
+    }
+}
+
+//GET CALL
+import { getMyGroups } from "@/lib/db/getMyGroups";
+
+export async function GET() {
+    try {
+        const supabase = await createClient();
+
+        const { user, profile } = await getProfile(supabase);
+
+        if (!user || !profile) {
+            return NextResponse.json(
+                { error: "Unauthorized" },
+                { status: 401 },
+            );
+        }
+
+        const groups = await getMyGroups(
+            supabase,
+            profile.id,
+        );
+
+        return NextResponse.json({
+            groups,
+        });
+    } catch (error) {
+        console.error("Get groups error:", error);
+
+        return NextResponse.json(
+            {
+                error:
+                    error instanceof Error
+                        ? error.message
+                        : "Gruppen konnten nicht geladen werden",
             },
             { status: 500 },
         );
