@@ -33,8 +33,7 @@ export async function POST(req: Request) {
                 { status: 401 },
             );
         }
-        console.log(user);
-        console.log(profile);
+
         //current SeasonID holen
         const activeSeasonId = await getCurrentSeasonByLeagueId(
             supabase,

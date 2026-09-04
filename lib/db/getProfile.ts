@@ -1,10 +1,20 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function getProfile(supabase: SupabaseClient) {
+
+  const start = performance.now();
+
+
   const {
     data: { user },
     error: userError,
   } = await supabase.auth.getUser();
+
+  console.log(
+    "auth.getUser:",
+    Math.round(performance.now() - start),
+    "ms"
+  );
 
   if (userError || !user) {
     return {
